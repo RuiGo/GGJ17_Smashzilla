@@ -1,0 +1,108 @@
+﻿
+# Please enter the commit message for your changes. Lines starting
+# with '#' will be ignored, and an empty message aborts the commit.
+# On branch master
+# Your branch is up-to-date with 'origin/master'.
+#
+# Changes to be committed:
+#	new file:   Assets/Sounds/Crumbling2.mp3
+#	new file:   Assets/Sounds/Crumbling2.mp3.meta
+#	new file:   Assets/Sounds/Crumbling3.mp3
+#	new file:   Assets/Sounds/Crumbling3.mp3.meta
+#	new file:   Assets/Sounds/Crumbling4.mp3
+#	new file:   Assets/Sounds/Crumbling4.mp3.meta
+#	new file:   Assets/Sounds/EmergencySirens.mp3
+#	new file:   Assets/Sounds/EmergencySirens.mp3.meta
+#	new file:   Assets/Sounds/Godzilla.mp3
+#	new file:   Assets/Sounds/Godzilla.mp3.meta
+#	new file:   Assets/Sounds/MainAudioMixer.mixer
+#	new file:   Assets/Sounds/MainAudioMixer.mixer.meta
+#	new file:   Assets/Sounds/TankShoot.mp3
+#	new file:   Assets/Sounds/TankShoot.mp3.meta
+#	new file:   Assets/Sounds/trexRoar1.mp3
+#	new file:   Assets/Sounds/trexRoar1.mp3.meta
+#	new file:   Assets/Sprites.meta
+#	new file:   Assets/Sprites/GGJ00_GameCredits_SplashScreen.jpg
+#	new file:   Assets/Sprites/GGJ00_GameCredits_SplashScreen.jpg.meta
+#	new file:   Assets/Sprites/_pawImage.png
+#	new file:   Assets/Sprites/_pawImage.png.meta
+#	new file:   Assets/Sprites/logo1.png
+#	new file:   Assets/Sprites/logo1.png.meta
+#	new file:   Assets/Sprites/logo2.png
+#	new file:   Assets/Sprites/logo2.png.meta
+#	new file:   Assets/Sprites/objective1.png
+#	new file:   Assets/Sprites/objective1.png.meta
+#	new file:   Assets/Sprites/objective2.png
+#	new file:   Assets/Sprites/objective2.png.meta
+#	new file:   Assets/Sprites/objective3.png
+#	new file:   Assets/Sprites/objective3.png.meta
+#	new file:   Assets/Sprites/objective4.png
+#	new file:   Assets/Sprites/objective4.png.meta
+#	new file:   Assets/Sprites/pawImage.png
+#	new file:   Assets/Sprites/pawImage.png.meta
+#	new file:   Assets/Sprites/waves.jpg
+#	new file:   Assets/Sprites/waves.jpg.meta
+#	new file:   Assets/Standard Assets.meta
+#	new file:   Assets/Standard Assets/Environment.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/CliffAlbedoSpecular.psd
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/CliffAlbedoSpecular.psd.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/GrassHillAlbedo.psd
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/GrassHillAlbedo.psd.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/GrassRockyAlbedo.psd
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/GrassRockyAlbedo.psd.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/MudRockyAlbedoSpecular.bmp
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/MudRockyAlbedoSpecular.bmp.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/MudRockyNormals.bmp
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/MudRockyNormals.bmp.meta
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/SandAlbedo.psd
+#	new file:   Assets/Standard Assets/Environment/TerrainAssets/SurfaceTextures/SandAlbedo.psd.meta
+#	new file:   Assets/Standard Assets/ParticleSystems.meta
+#	new file:   Assets/Standard Assets/ParticleSystems/Materials.meta
+#	new file:   Assets/Standard Assets/ParticleSystems/Materials/ParticleFirecloud.mat
+#	new file:   Assets/Standard Assets/ParticleSystems/Materials/ParticleFirecloud.mat.meta
+#	new file:   Assets/Standard Assets/ParticleSystems/Textures.meta
+#	new file:   Assets/Standard Assets/ParticleSystems/Textures/ParticleFirecloud.png
+#	new file:   Assets/Standard Assets/ParticleSystems/Textures/ParticleFirecloud.png.meta
+#	new file:   Assets/Textures.meta
+#	new file:   Assets/Textures/Particles.meta
+#	new file:   Assets/Textures/Particles/nuvem_fumo 1.tga
+#	new file:   Assets/Textures/Particles/nuvem_fumo 1.tga.meta
+#	new file:   Assets/Textures/Pata.bump.png
+#	new file:   Assets/Textures/Pata.bump.png.meta
+#	new file:   Assets/Textures/Pata.tex.png
+#	new file:   Assets/Textures/Pata.tex.png.meta
+#	new file:   Assets/Textures/Turret_textura.png
+#	new file:   Assets/Textures/Turret_textura.png.meta
+#	new file:   Assets/Textures/ambulancia_textura.png
+#	new file:   Assets/Textures/ambulancia_textura.png.meta
+#	new file:   Assets/Textures/hospital_janelas_tex.psd
+#	new file:   Assets/Textures/hospital_janelas_tex.psd.meta
+#	new file:   Assets/Textures/hospital_tex.png
+#	new file:   Assets/Textures/hospital_tex.png.meta
+#	new file:   Assets/Textures/igreja_textura.png
+#	new file:   Assets/Textures/igreja_textura.png.meta
+#	new file:   Assets/Textures/nuke.png
+#	new file:   Assets/Textures/nuke.png.meta
+#	new file:   Assets/Textures/skyscrapper_textura.png
+#	new file:   Assets/Textures/skyscrapper_textura.png.meta
+#	new file:   Assets/Textures/teste_scorched 1.png
+#	new file:   Assets/Textures/teste_scorched 1.png.meta
+#	new file:   Assets/Textures/truck_textura.png
+#	new file:   Assets/Textures/truck_textura.png.meta
+#	new file:   Assets/_materials.meta
+#	new file:   Assets/_materials/dust_particle.mat
+#	new file:   Assets/_materials/dust_particle.mat.meta
+#	new file:   Assets/_materials/dust_particle2.mat
+#	new file:   Assets/_materials/dust_particle2.mat.meta
+#	new file:   Assets/_textures.meta
+#
+# Untracked files:
+#	Assets/_textures/
+#	Library/
+#	ProjectSettings/
+#	Shockwavez.csproj
+#	Shockwavez.sln
+#
+
