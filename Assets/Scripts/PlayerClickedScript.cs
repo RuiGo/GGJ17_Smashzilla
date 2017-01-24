@@ -1,0 +1,116 @@
+﻿using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class PlayerClickedScript : MonoBehaviour {
+
+
+    [SerializeField]
+    protected AudioClip[] crumble;
+
+    private Camera cam;
+
+    [SerializeField]
+    protected GameObject paw;
+
+    private Transform objectHit;
+    private bool pawAttacking = false;
+    PlayerController playerController;
+
+    // Attack configuration
+    public float shootingRate = 1.0f;
+    private float shootCooldown;
+    public GameObject impactWaves;
+
+
+    void Start() {
+        cam = Camera.main;
+        shootCooldown = 0;
+        playerController = GetComponentInParent<PlayerController>();
+    }
+
+    void Update() {
+        // Shoot Timer
+        if (shootCooldown > 0) {
+            shootCooldown -= Time.deltaTime;
+        }
+
+        // Get player Right Click input
+        if (Input.GetButton("Fire1")) {
+            if (shootCooldown <= 0) {
+                shootCooldown = shootingRate;
+                objectHit = null;
+
+                Debug.Log("Strikes:    " + playerController.strikesAvailable);
+                if (playerController.strikesAvailable > 0)
+                {
+                    playerClicked();
+                }
+
+            }
+        }
+
+        //Debug.Log("pawAttacking-----------> " + pawAttacking);
+
+        if (pawAttacking)
+        {
+            if (paw.transform.position.y >= 0.80f)
+                paw.transform.position = Vector3.Lerp(paw.transform.position, new Vector3(paw.transform.position.x, 0.80f, paw.transform.position.z), 10f * Time.deltaTime);
+                // paw.transform.Translate(-Vector3.up * 90 * Time.deltaTime);
+            else
+                pawAttacking = false;
+        }
+        
+    }
+
+    // Call player attack
+    public void playerClicked() {
+
+        playerController.useStrike();
+
+        RaycastHit hit;
+        Ray ray = cam.ScreenPointToRay(Input.mousePosition);
+
+
+        if (Physics.Raycast(ray, out hit))
+        {
+
+            objectHit = hit.transform;
+            Debug.Log("Clicado" + objectHit.transform);
+            paw.transform.position = new Vector3(hit.point.x, 30, hit.point.z);
+
+            if (hit.collider.gameObject.tag == "Enemy")
+            {
+                StartCoroutine(tiltBuild(hit.collider.gameObject));
+                objectHit.GetComponent<AudioSource>().Play();
+                return;
+            }
+
+            if (hit.collider.gameObject.tag == "Building" || hit.collider.gameObject.tag == "Floor"
+                || hit.collider.gameObject.tag == "ElectricTower")
+            {
+                objectHit.GetComponent<AudioSource>().PlayOneShot(crumble[Random.Range(0, crumble.Length)]);
+                pawAttacking = true;
+                Instantiate(impactWaves, new Vector3(hit.point.x, 0.70f, hit.point.z), Quaternion.identity);
+                cam.GetComponent<CameraShake>().shakeDuration = 1;
+                cam.GetComponent<CameraShake>().shakeAmount = 0.3f;
+            }
+        }
+    }
+
+    public IEnumerator tiltBuild(GameObject build)
+    {
+        Debug.Log("entrou na rotina");
+        Color originalColor = build.GetComponent<MeshRenderer>().material.color;
+        build.GetComponent<MeshRenderer>().material.color = new Color(255, 0, 0, 1);
+        yield return new WaitForSeconds(0.10f);
+        Debug.Log(".25s depois vai alterar para COR ORIGINAL");
+        build.GetComponent<MeshRenderer>().material.color = originalColor;
+        yield return new WaitForSeconds(0.10f);
+        Debug.Log(".25 depois vai alterar para VERMELHO");
+        build.GetComponent<MeshRenderer>().material.color = new Color(255, 0, 0, 1);
+        yield return new WaitForSeconds(0.10f);
+        Debug.Log(".25 depois vai alterar para COR ORIGINAL");
+        build.GetComponent<MeshRenderer>().material.color = originalColor;
+    }
+}
