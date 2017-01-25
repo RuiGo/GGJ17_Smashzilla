@@ -11,8 +11,7 @@ public class LevelManager : MonoBehaviour {
     //public Slider fill;
 
     // Use this for initialization
-    void Awake()
-    {
+    void Awake()  {
         currentScene = SceneManager.GetActiveScene().buildIndex;
         sceneTotal = SceneManager.sceneCountInBuildSettings;
     }
@@ -22,19 +21,16 @@ public class LevelManager : MonoBehaviour {
     }
 	
 	// Update is called once per frame
-	 public void LoadScene(int i)
-    {
+	 public void LoadScene(int i) {
         SceneManager.LoadScene(i);
         //fill.value = 0.0f;
     }
 
-    public void ReturnMenu() 
-    {
+    public void ReturnMenu() {
         SceneManager.LoadScene(0);
     }
 
-    public void Quit()
-    {
+    public void Quit() {
         Application.Quit();
     }
 

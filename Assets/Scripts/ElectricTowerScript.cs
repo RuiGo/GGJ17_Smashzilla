@@ -4,23 +4,24 @@ using UnityEngine;
 
 public class ElectricTowerScript : MonoBehaviour {
 
-    public bool isAlive;
     private bool startCounter;
-    public float waiter = 0.5f;
-    public GameObject leftTower;
-    public GameObject rightTower;
     private ElectricTowerScript leftTowerScript;
     private ElectricTowerScript rightTowerScript;
     private GameObject normalTower;
     private GameObject destroyedTower;
-
-    public GameObject wave;
     private WaveImpactScript waveScript;
     private ParticleSystem waveParticles;
+
+    public bool isAlive;
+    public float timeToWait = 0.5f;
+    public GameObject leftTower;
+    public GameObject rightTower;
+    public GameObject wave;
     public float waveMaxRadius = 0;
     public float waveDuration = 0;
-    public int hitForce = 0;
     public Vector3 particlesScale = new Vector3(0, 0, 0);
+
+    
 
     void Start () {
         isAlive = true;
@@ -41,8 +42,8 @@ public class ElectricTowerScript : MonoBehaviour {
 	void Update () {
 
 		if (startCounter) {
-            waiter -= Time.deltaTime;
-            if (waiter <= 0) {
+            timeToWait -= Time.deltaTime;
+            if (timeToWait <= 0) {
                 DestroyTower();
                 startCounter = false;
             }
@@ -56,10 +57,8 @@ public class ElectricTowerScript : MonoBehaviour {
         waveScript = instancia.GetComponent<WaveImpactScript>();
         waveScript.waveDuration = (waveDuration != 0) ? waveDuration : waveScript.waveDuration;
         waveScript.waveMaxRadius = (waveMaxRadius != 0) ? waveMaxRadius : waveScript.waveMaxRadius;
-        waveScript.hitForce = (hitForce != 0) ? hitForce : waveScript.hitForce;
 
-        if (instancia.transform.Find("waveParticles"))
-        {
+        if (instancia.transform.Find("waveParticles")) {
             instancia.transform.Find("waveParticles").transform.localScale = (particlesScale != new Vector3(0, 0, 0)) ? particlesScale : instancia.transform.Find("waveParticles").transform.localScale;
         }
         normalTower.SetActive(false);
@@ -68,21 +67,16 @@ public class ElectricTowerScript : MonoBehaviour {
     }
 
     private void DestroyTower() {
-        if (leftTower)
-        {
-            if (leftTowerScript.isAlive)
-            {
+        if (leftTower) {
+            if (leftTowerScript.isAlive) {
                 leftTowerScript.callDestroyTower();
             }
         }
 
-        if (rightTower)
-        {
-            if (rightTowerScript.isAlive)
-            {
+        if (rightTower)  {
+            if (rightTowerScript.isAlive) {
                 rightTowerScript.callDestroyTower();
             }
         }
     }
-
 }

@@ -4,19 +4,15 @@ using UnityEngine;
 
 public class WaveImpactScript : MonoBehaviour {
 
-    // Attack
-    public int hitForce = 100;
-
-    public float waveMaxRadius = 10.0f;
-    public float waveMinRadius = 0.0f;
-    public float waveDuration = 2.0f; 
-
     private GameObject thisWave;
     private SphereCollider waveSphereCollider;
     private float currentRadiusHolder;
     private float increaseRadius = 0.0f;
-    private float t = 0.0f;
-    private EnemyHealthScript enemyHealth;
+
+    // Attack
+    public float waveMaxRadius = 10.0f;
+    public float waveMinRadius = 0.0f;
+    public float waveDuration = 2.0f; 
 
     void Start () {
         increaseRadius = (waveMaxRadius - waveMinRadius) / waveDuration;
@@ -34,20 +30,17 @@ public class WaveImpactScript : MonoBehaviour {
     }
 
     private void OnTriggerEnter(Collider other) {
-        if (other.tag == "Building") {
-
-            ScoreImpact.scoreImpact.Score(); //Chama a função do Score cada vez que colide com um Mesh
+        if (other.tag == "Building" || other.tag == "Vehicle") {
             //other.gameObject.GetComponent<MeshRenderer>().material.color = new Color(255, 0, 0, 1);
             if (other.gameObject.GetComponent<DestruicaoEdificios>())
                 other.gameObject.GetComponent<DestruicaoEdificios>().Destruir();
+            else 
+                print("Missing <DestruicaoEdificios> component!");
             //other.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
             // enemyHealth = other.GetComponent<EnemyHealthScript>();
-            // enemyHealth.hp -= hitForce;
-        } else if (other.gameObject.tag == "ElectricTower")
-        {
-            if (other.gameObject.GetComponent<ElectricTowerScript>().isAlive)
-            {
+        } else if (other.gameObject.tag == "ElectricTower") {
+            if (other.gameObject.GetComponent<ElectricTowerScript>().isAlive) {
                 other.gameObject.GetComponent<ElectricTowerScript>().callDestroyTower();
             }
         }
