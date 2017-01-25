@@ -16,7 +16,7 @@ public class ScoreImpact : MonoBehaviour {
     [SerializeField]
     private LevelManager sceneManager;
     [SerializeField]
-    private PlayerController playerController;
+    private PlayerStatistics playerStats;
     [SerializeField]
     private Image[] marks;
 
@@ -82,7 +82,7 @@ public class ScoreImpact : MonoBehaviour {
         else if (sli.value > 100) //é necessário?
             sli.value = 100;
 
-        if (sli.value == sli.maxValue || playerController.strikesAvailable == 0)
+        if (sli.value == sli.maxValue || playerStats.strikesAvailable == 0)
             levelEnded = true;
     }
 }

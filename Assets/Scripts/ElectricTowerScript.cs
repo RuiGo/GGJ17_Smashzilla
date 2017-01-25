@@ -67,6 +67,7 @@ public class ElectricTowerScript : MonoBehaviour {
     }
 
     private void DestroyTower() {
+        ScoreImpact.scoreImpact.Score();
         if (leftTower) {
             if (leftTowerScript.isAlive) {
                 leftTowerScript.callDestroyTower();

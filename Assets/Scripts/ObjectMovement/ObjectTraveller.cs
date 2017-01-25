@@ -17,7 +17,9 @@ public class ObjectTraveller : MonoBehaviour {
     [SerializeField]
     protected Transform currentPath;
     [SerializeField]
-    protected Transform summonPosition; 
+    protected Transform summonPosition;
+
+    public bool isMoving = true;
 
     void Start () {
         currentPathIndex = 0;
@@ -26,12 +28,14 @@ public class ObjectTraveller : MonoBehaviour {
     }
 	
 	void Update () {
-        if (path.Length > 0 && currentPath != null) {
-            distanceToNode = Vector3.Distance(transform.position, currentPath.position);
-            if(distanceToNode > maxDistanceToNode) {
-                MoveToPathNode();
-            } else {
-                RequestNewPath();
+        if (isMoving) {
+            if (path.Length > 0 && currentPath != null) {
+                distanceToNode = Vector3.Distance(transform.position, currentPath.position);
+                if (distanceToNode > maxDistanceToNode) {
+                    MoveToPathNode();
+                } else {
+                    RequestNewPath();
+                }
             }
         }
 	}

@@ -75,19 +75,17 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\CameraControls\CameraControls.cs" />
-    <Compile Include="Assets\Scripts\CameraShake.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraControls.cs" />
+    <Compile Include="Assets\Scripts\Camera\CameraShake.cs" />
     <Compile Include="Assets\Scripts\ComportamentoParticula.cs" />
     <Compile Include="Assets\Scripts\DestruicaoEdificios.cs" />
     <Compile Include="Assets\Scripts\ElectricTowerScript.cs" />
-    <Compile Include="Assets\Scripts\EnemyHealthScript.cs" />
     <Compile Include="Assets\Scripts\LevelManager.cs" />
     <Compile Include="Assets\Scripts\ObjectExplodeScript.cs" />
     <Compile Include="Assets\Scripts\ObjectMovement\ObjectTraveller.cs" />
     <Compile Include="Assets\Scripts\PlayerClickedScript.cs" />
-    <Compile Include="Assets\Scripts\PlayerController.cs" />
+    <Compile Include="Assets\Scripts\PlayerStatistics.cs" />
     <Compile Include="Assets\Scripts\ScoreImpact.cs" />
-    <Compile Include="Assets\Scripts\Touch1.cs" />
     <Compile Include="Assets\Scripts\WaveImpactScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

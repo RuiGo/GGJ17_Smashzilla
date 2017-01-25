@@ -31,14 +31,11 @@ public class WaveImpactScript : MonoBehaviour {
 
     private void OnTriggerEnter(Collider other) {
         if (other.tag == "Building" || other.tag == "Vehicle") {
-            //other.gameObject.GetComponent<MeshRenderer>().material.color = new Color(255, 0, 0, 1);
             if (other.gameObject.GetComponent<DestruicaoEdificios>())
                 other.gameObject.GetComponent<DestruicaoEdificios>().Destruir();
             else 
                 print("Missing <DestruicaoEdificios> component!");
-            //other.gameObject.GetComponent<MeshRenderer>().enabled = false;
 
-            // enemyHealth = other.GetComponent<EnemyHealthScript>();
         } else if (other.gameObject.tag == "ElectricTower") {
             if (other.gameObject.GetComponent<ElectricTowerScript>().isAlive) {
                 other.gameObject.GetComponent<ElectricTowerScript>().callDestroyTower();
