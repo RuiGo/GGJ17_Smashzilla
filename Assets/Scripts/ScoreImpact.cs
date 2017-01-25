@@ -40,7 +40,6 @@ public class ScoreImpact : MonoBehaviour {
         totalObjectives = GameObject.FindGameObjectsWithTag("Building").Length;
         totalObjectives += GameObject.FindGameObjectsWithTag("ElectricTower").Length;
 
-        //TODO: check calculation
         individualObjectValue = 100f / totalObjectives;
     }
 
@@ -63,7 +62,6 @@ public class ScoreImpact : MonoBehaviour {
         }
     }
 
-    //TODO: make it so it is called only when scored
     public void Score() {
         sli.value += individualObjectValue;
         if (sli.value >= 20) {
@@ -81,16 +79,13 @@ public class ScoreImpact : MonoBehaviour {
             marks[1].enabled = true;
             mainAudioMixer.SetFloat("EmergencyVolume", 0.0f);
         }
-        if (sli.value >= 88) {
-            marks[2].enabled = true;
-            //mainAudioMixer.SetFloat("CrowdsVolume", -5.0f);
-        }
-        if (sli.value >= 95)
+        if (sli.value >= 88) 
+            marks[2].enabled = true;          
+        if (sli.value > 99) 
             marks[3].enabled = true;
-        if (sli.value > 99) //é necessário?
             sli.value = 100;
 
-        if (sli.value == sli.maxValue || playerStats.strikesAvailable == 0)
+        if (sli.value == sli.maxValue || playerStats.strikesAvailable <= 0)
             levelEnded = true;
     }
 }

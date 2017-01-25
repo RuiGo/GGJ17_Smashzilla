@@ -23,7 +23,6 @@ public class LevelManager : MonoBehaviour {
 	// Update is called once per frame
 	 public void LoadScene(int i) {
         SceneManager.LoadScene(i);
-        //fill.value = 0.0f;
     }
 
     public void ReturnMenu() {
