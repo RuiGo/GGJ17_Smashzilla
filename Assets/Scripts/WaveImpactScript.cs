@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class WaveImpactScript : MonoBehaviour {
 
-    private GameObject thisWave;
     private SphereCollider waveSphereCollider;
     private float currentRadiusHolder;
     private float increaseRadius = 0.0f;
@@ -29,13 +28,16 @@ public class WaveImpactScript : MonoBehaviour {
         waveSphereCollider.radius = currentRadiusHolder;
     }
 
-    private void OnTriggerEnter(Collider other) {
+    private void OnTriggerEnter (Collider other) {
         if (other.tag == "Building" || other.tag == "Vehicle") {
             if (other.gameObject.GetComponent<DestruicaoEdificios>())
                 other.gameObject.GetComponent<DestruicaoEdificios>().Destruir();
-            else 
-                print("Missing <DestruicaoEdificios> component!");
 
+            if (other.gameObject.GetComponent<ObjectExplodeScript>())
+                other.gameObject.GetComponent<ObjectExplodeScript>().ExplodeObject();
+
+            if (other.gameObject.GetComponentInParent<ObjectTraveller>())
+                other.gameObject.GetComponentInParent<ObjectTraveller>().isMoving = false;
         } else if (other.gameObject.tag == "ElectricTower") {
             if (other.gameObject.GetComponent<ElectricTowerScript>().isAlive) {
                 other.gameObject.GetComponent<ElectricTowerScript>().callDestroyTower();

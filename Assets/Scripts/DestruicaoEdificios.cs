@@ -24,6 +24,12 @@ public class DestruicaoEdificios : MonoBehaviour {
     public void Destruir () {
         Invoke("EsperaExplosao", 0.1f);
 
+        if (GetComponent<AudioSource>()) {
+            int n = Random.Range(0, SoundStorage.soundStorage.crumbleArray.Length);
+            GetComponent<AudioSource>().PlayOneShot(SoundStorage.soundStorage.crumbleArray[n]);
+        } else
+            print("No audioSource!");
+
         //Criação de Escombros
         for (int i = 0; i < numeroParticulas; i++) {
             particulaEscombro = listaParticulas[Random.Range(0, listaParticulas.Length)];
@@ -43,6 +49,8 @@ public class DestruicaoEdificios : MonoBehaviour {
     }
 
     private void EsperaExplosao() {
-        Destroy(this.gameObject);
+        //Destroy(this.gameObject);
+        GetComponent<MeshRenderer>().enabled = false;
+        GetComponent<Collider>().enabled = false;
     }
 }

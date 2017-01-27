@@ -86,6 +86,7 @@
     <Compile Include="Assets\Scripts\PlayerClickedScript.cs" />
     <Compile Include="Assets\Scripts\PlayerStatistics.cs" />
     <Compile Include="Assets\Scripts\ScoreImpact.cs" />
+    <Compile Include="Assets\Scripts\SoundStorage.cs" />
     <Compile Include="Assets\Scripts\WaveImpactScript.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

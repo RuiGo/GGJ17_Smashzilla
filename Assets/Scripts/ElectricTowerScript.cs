@@ -52,6 +52,12 @@ public class ElectricTowerScript : MonoBehaviour {
 
     public void callDestroyTower() {
         isAlive = false;
+
+        if (GetComponent<AudioSource>())
+            GetComponent<AudioSource>().PlayOneShot(SoundStorage.soundStorage.explosion);
+        else
+            print("No audioSource!");
+
         GameObject instancia = Instantiate(wave, new Vector3(this.gameObject.transform.position.x, 0.70f, this.gameObject.transform.position.z), Quaternion.identity) as GameObject;
 
         waveScript = instancia.GetComponent<WaveImpactScript>();

@@ -57,7 +57,7 @@ public class CameraControls : MonoBehaviour {
                 cam.transform.localPosition = newPosition;
         }
 
-        if (Input.GetButtonDown("Fire2")) {
+        /*if (Input.GetButtonDown("Fire2")) {
             initClickPosition = Input.mousePosition;
         }
 
@@ -71,7 +71,7 @@ public class CameraControls : MonoBehaviour {
                 && newPosition.y >= yMinCameraBorder && newPosition.y <= yMaxCameraBorder) {
                 cam.transform.localPosition = newPosition;
             }
-        }
+        }*/
     }
 
     void ZoomIn()  {

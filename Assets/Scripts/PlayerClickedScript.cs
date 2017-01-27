@@ -5,13 +5,10 @@ using UnityEngine;
 public class PlayerClickedScript : MonoBehaviour {
 
     private Camera cam;
-    private Transform objectHit;
     private bool pawAttacking = false;
     private PlayerStatistics playerStats;
     private float smashCooldownTimer;
 
-    [SerializeField]
-    protected AudioClip[] crumble;
     [SerializeField]
     protected GameObject paw;
 
@@ -33,7 +30,6 @@ public class PlayerClickedScript : MonoBehaviour {
         if (Input.GetButton("Fire1")) {
             if (smashCooldownTimer <= 0) {
                 smashCooldownTimer = smashCooldown;
-                objectHit = null;
                 if (playerStats.strikesAvailable > 0) {
                     PlayerClicked();
                 }
@@ -58,25 +54,29 @@ public class PlayerClickedScript : MonoBehaviour {
         RaycastHit hit;
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
-
         if (Physics.Raycast(ray, out hit)) {
 
-            objectHit = hit.transform;
+            Transform objectHit = hit.transform;
             //Debug.Log("Clicado" + objectHit.transform);
             paw.transform.position = new Vector3(hit.point.x, 30, hit.point.z);
 
-            if (hit.collider.gameObject.tag == "Enemy") {
-                objectHit.GetComponent<AudioSource>().Play();
-                print("Sound: " + objectHit.GetComponent<AudioSource>().clip);
+            if (hit.collider.gameObject.CompareTag("Enemy")) {
+                if (!objectHit.GetComponent<AudioSource>().isPlaying) {
+                    objectHit.GetComponent<AudioSource>().Play();
+                    print("Sound: " + objectHit.GetComponent<AudioSource>().clip);
+                }
                 return;
             }
-
             if (hit.collider.gameObject.tag == "Building" || hit.collider.gameObject.tag == "Floor"
                 || hit.collider.gameObject.tag == "ElectricTower" || hit.collider.gameObject.tag == "Vehicle") {
-                objectHit.GetComponent<AudioSource>().PlayOneShot(crumble[Random.Range(0, crumble.Length)]);
                 pawAttacking = true;
                 Instantiate(impactWaves, new Vector3(hit.point.x, 0.70f, hit.point.z), Quaternion.identity);
                 cam.GetComponent<CameraShake>().ShakeCamera();
+                
+                if (objectHit.GetComponent<AudioSource>()) {
+                    int n = Random.Range(0, SoundStorage.soundStorage.crumbleArray.Length);
+                    objectHit.GetComponent<AudioSource>().PlayOneShot(SoundStorage.soundStorage.crumbleArray[n]);
+                }
             }
         }
     }
