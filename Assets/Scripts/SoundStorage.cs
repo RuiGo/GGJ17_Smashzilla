@@ -7,7 +7,8 @@ public class SoundStorage : MonoBehaviour {
 
     public static SoundStorage soundStorage;
     public AudioClip[] crumbleArray;
-    public AudioClip[] roarArray;
+    public AudioClip monsterRoar;
+    public AudioClip monsterScreech;
     public AudioClip explosion;
     public AudioMixer mainAudioMixer;
 

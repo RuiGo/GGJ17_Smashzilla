@@ -49,10 +49,12 @@ public class DestruicaoEdificios : MonoBehaviour {
     }
 
     private void EsperaExplosao() {
-        //Destroy(this.gameObject);
+        //Destroy(this.gameObject);    
         GetComponent<MeshRenderer>().enabled = false;
-        GetComponent<Collider>().enabled = false;
-        if(transform.childCount > 0) {
+        foreach (Collider col in GetComponents<Collider>()) {
+            col.enabled = false;
+        }
+        if (transform.childCount > 0) {
             foreach(Transform t in transform) {
                 if (t.CompareTag("Enemy"))
                     t.gameObject.SetActive(false);

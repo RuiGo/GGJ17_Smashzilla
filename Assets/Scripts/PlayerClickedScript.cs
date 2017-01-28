@@ -70,6 +70,14 @@ public class PlayerClickedScript : MonoBehaviour {
         }        
     }
 
+    void PlayScreech () {
+        paw.GetComponent<AudioSource>().PlayOneShot(SoundStorage.soundStorage.monsterScreech);
+    }
+
+    void PlayRoar () {
+        paw.GetComponent<AudioSource>().PlayOneShot(SoundStorage.soundStorage.monsterRoar);
+    }
+
     // Call player attack
     public void PlayerClicked() {
         pawAttacking = false;
@@ -93,6 +101,8 @@ public class PlayerClickedScript : MonoBehaviour {
                     if (objectHit.GetComponent<AudioSource>().isPlaying)
                         objectHit.GetComponent<AudioSource>().Stop();
                     objectHit.GetComponent<AudioSource>().Play();
+                    if (Random.Range(1, 3) == 2)
+                        Invoke("PlayScreech", 0.25f);
                 }
                 pawAttacking = true;
                 hitNoZone = true;
@@ -100,6 +110,8 @@ public class PlayerClickedScript : MonoBehaviour {
             }
             if (hit.collider.gameObject.tag == "Building" || hit.collider.gameObject.tag == "Floor"
                 || hit.collider.gameObject.tag == "ElectricTower" || hit.collider.gameObject.tag == "Vehicle") {
+                if(Random.Range(1, 4) == 3)
+                    Invoke("PlayRoar", 0.25f);
                 pawAttacking = true;
                 Instantiate(impactWaves, new Vector3(hit.point.x, 0.70f, hit.point.z), Quaternion.identity);
                 cam.GetComponent<CameraShake>().ShakeCamera();
