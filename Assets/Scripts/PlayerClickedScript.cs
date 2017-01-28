@@ -5,15 +5,19 @@ using UnityEngine;
 public class PlayerClickedScript : MonoBehaviour {
 
     private Camera cam;
-    private bool pawAttacking = false;
+    public bool pawAttacking = false; //temp public
+    public bool hitNoZone = false;  //temp public
+    public bool pawGoingUp = false; //temp public
     private PlayerStatistics playerStats;
     private float smashCooldownTimer;
+    private Vector3 pawStartFallingPosition;
 
     [SerializeField]
-    protected GameObject paw;
+    protected Transform paw;
 
     // Attack configuration
-    public float smashCooldown = 1.0f;
+    public float smashCooldown = 1.5f;
+    public float pawFallingSpeed = 5f;
     public GameObject impactWaves;
 
 
@@ -33,21 +37,44 @@ public class PlayerClickedScript : MonoBehaviour {
                 if (playerStats.strikesAvailable > 0) {
                     PlayerClicked();
                 }
-
             }
         }
 
         if (pawAttacking) {
-            if (paw.transform.position.y >= 0.80f)
-                paw.transform.position = Vector3.Lerp(paw.transform.position, new Vector3(paw.transform.position.x, 0.80f, paw.transform.position.z), 10f * Time.deltaTime);
-                // paw.transform.Translate(-Vector3.up * 90 * Time.deltaTime);
-            else
-                pawAttacking = false;
+            float fallLimit = hitNoZone ? 3f : 0.8f;
+            pawFallingSpeed = hitNoZone ? 3f : 7.5f;
+            Vector3 fallPosition = new Vector3(paw.position.x, fallLimit, paw.position.z);
+            Vector3 fallDirection = pawStartFallingPosition - fallPosition;
+            if (!pawGoingUp) {                
+                if (paw.position.y > fallLimit) {
+                    Vector3 fallVector = fallDirection * pawFallingSpeed * Time.deltaTime;
+                    paw.position -= fallVector;
+                } else {
+                    paw.position = fallPosition;
+                    if (hitNoZone) 
+                        pawGoingUp = true;                        
+                    else
+                        pawAttacking = false;
+                }
+            } else {
+                if (paw.position.y < pawStartFallingPosition.y) {
+                    Vector3 riseVector = fallDirection * (pawFallingSpeed / 5f) * Time.deltaTime;
+                    paw.position += riseVector;
+                } else {
+                    paw.position = pawStartFallingPosition;
+                    pawGoingUp = false;
+                    hitNoZone = false;
+                    pawAttacking = false;
+                }
+            }
         }        
     }
 
     // Call player attack
     public void PlayerClicked() {
+        pawAttacking = false;
+        hitNoZone = false;
+        pawGoingUp = false;
 
         playerStats.UseStrike();
 
@@ -57,14 +84,18 @@ public class PlayerClickedScript : MonoBehaviour {
         if (Physics.Raycast(ray, out hit)) {
 
             Transform objectHit = hit.transform;
-            //Debug.Log("Clicado" + objectHit.transform);
-            paw.transform.position = new Vector3(hit.point.x, 30, hit.point.z);
+            //Debug.Log("Clicado" + objectHit.gameObject.name);
+            pawStartFallingPosition = new Vector3(hit.point.x, 30, hit.point.z);
+            paw.position = pawStartFallingPosition;
 
             if (hit.collider.gameObject.CompareTag("Enemy")) {
-                if (!objectHit.GetComponent<AudioSource>().isPlaying) {
+                if (objectHit.GetComponent<AudioSource>()) {
+                    if (objectHit.GetComponent<AudioSource>().isPlaying)
+                        objectHit.GetComponent<AudioSource>().Stop();
                     objectHit.GetComponent<AudioSource>().Play();
-                    print("Sound: " + objectHit.GetComponent<AudioSource>().clip);
                 }
+                pawAttacking = true;
+                hitNoZone = true;
                 return;
             }
             if (hit.collider.gameObject.tag == "Building" || hit.collider.gameObject.tag == "Floor"

@@ -44,7 +44,7 @@ public class DestruicaoEdificios : MonoBehaviour {
 
             instancia.GetComponent<Rigidbody>().AddForce(ajustePosicional * multiplicadorForca, ForceMode.Impulse);
         }
-        Instantiate(objectoEscombro, this.transform.position, Quaternion.Euler(this.transform.eulerAngles + new Vector3(90,0,0)));
+        Instantiate(objectoEscombro, transform.position, Quaternion.Euler(transform.eulerAngles + new Vector3(90,0,0)));
         ScoreImpact.scoreImpact.Score();
     }
 
@@ -52,5 +52,11 @@ public class DestruicaoEdificios : MonoBehaviour {
         //Destroy(this.gameObject);
         GetComponent<MeshRenderer>().enabled = false;
         GetComponent<Collider>().enabled = false;
+        if(transform.childCount > 0) {
+            foreach(Transform t in transform) {
+                if (t.CompareTag("Enemy"))
+                    t.gameObject.SetActive(false);
+            }
+        }
     }
 }

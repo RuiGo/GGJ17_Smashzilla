@@ -9,18 +9,17 @@ public class ScoreImpact : MonoBehaviour {
     private float individualObjectValue;
     private float loadNextLevelTimer = 10f;
     private bool levelEnded = false;
-    private Slider sli;
     private int totalObjectives;
-
-    //[SerializeField]
-    //private LevelManager sceneManager;
+    private PlayerStatistics playerStats;
 
     [SerializeField]
+    private Slider sli;
+    [SerializeField]
     private Image[] marks;
+    [SerializeField]
+    private GameObject nextLevelButton;
 
     public static ScoreImpact scoreImpact;
-
-    
 
     void Awake() {
         if (scoreImpact == null)
@@ -30,9 +29,7 @@ public class ScoreImpact : MonoBehaviour {
     }
 
     void Start() {
-        sli = GetComponent<Slider>();
-        //currentLevel = sceneManager.currentScene;
-        //totalScenes = sceneManager.sceneTotal;
+        playerStats = GetComponent<PlayerStatistics>();
         totalObjectives = GameObject.FindGameObjectsWithTag("Building").Length;
         totalObjectives += GameObject.FindGameObjectsWithTag("ElectricTower").Length;
 
@@ -40,22 +37,12 @@ public class ScoreImpact : MonoBehaviour {
     }
 
     void Update() {
-        //print(sli.value);
-        if (Input.GetKeyDown(KeyCode.N)) {
-            /*if(currentLevel + 1 < totalScenes)
-                sceneManager.LoadScene(currentLevel + 1);
-            else
-                sceneManager.ReturnMenu();*/
-        }
         if(levelEnded) {
-            /*if(loadNextLevelTimer > 0) {
-                loadNextLevelTimer -= Time.deltaTime;
-            } else {
-                if(currentLevel + 1 < totalScenes)
-                    sceneManager.LoadScene(currentLevel + 1);
-                else
-                    sceneManager.ReturnMenu();
-            }*/
+            if (!nextLevelButton.activeInHierarchy)
+                nextLevelButton.SetActive(true);
+        } else {
+            if (sli.value >= 52 && playerStats.strikesAvailable == 0)
+                levelEnded = true;
         }
     }
 
@@ -77,12 +64,11 @@ public class ScoreImpact : MonoBehaviour {
             SoundStorage.soundStorage.mainAudioMixer.SetFloat("EmergencyVolume", 0.0f);
         }
         if (sli.value >= 88) 
-            marks[2].enabled = true;          
-        if (sli.value > 99) 
+            marks[2].enabled = true;
+        if (sli.value > 99) {
             marks[3].enabled = true;
-
-        /*if (sli.value > 99 || playerStatistics.strikesAvailable <= 0)
-            levelEnded = true;*/
+            levelEnded = true;
+        } 
     }
 }
     

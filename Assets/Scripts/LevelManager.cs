@@ -5,28 +5,36 @@ using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 public class LevelManager : MonoBehaviour {
-    public int currentScene;
-    public int sceneTotal;
 
-    //public Slider fill;
+    public static LevelManager levelManager;
 
-    // Use this for initialization
     void Awake()  {
-        currentScene = SceneManager.GetActiveScene().buildIndex;
-        sceneTotal = SceneManager.sceneCountInBuildSettings;
+        if (levelManager == null)
+            levelManager = this;
+        else
+            Destroy(gameObject);
     }
 
-    // Use this for initialization
-    void Start () {
-    }
-	
-	// Update is called once per frame
-	 public void LoadScene(int i) {
-        SceneManager.LoadScene(i);
+    public void RestartLevel() {
+        print("RestartLevel");
+        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
     }
 
-    public void ReturnMenu() {
-        SceneManager.LoadScene(0);
+    public void LoadFirstLevel() {
+        SceneManager.LoadScene("Level1");
+    }
+
+    public void LoadNextLevel() {
+        print("NextLevel");
+        int index = SceneManager.GetActiveScene().buildIndex;
+        if (index + 1 < SceneManager.sceneCountInBuildSettings)
+            SceneManager.LoadScene(index + 1);
+        else
+            SceneManager.LoadScene("MainMenu");
+    }
+
+    public void LoadMainMenu() {
+        SceneManager.LoadScene("MainMenu");
     }
 
     public void Quit() {
